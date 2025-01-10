@@ -13,7 +13,7 @@ class UserController
         $this->validate(
             ['full_name' => 'string',
             'email' => 'string',
-            'password' => 'string'
+            'password' => 'string',
             ]);
         $user = new User();
         $user->create($_POST['full_name'], $_POST['email'], $_POST['password']);

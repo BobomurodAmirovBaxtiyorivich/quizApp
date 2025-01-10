@@ -1,6 +1,9 @@
 <?php
 
 use Src\Route;
-use App\Controller;
 
-Route::getMethod("/", [Controller::class, "home"]);
+if (Route::isAPIcall()){
+    require 'Routes/api.php';
+    exit();
+}
+require 'Routes/web.php';

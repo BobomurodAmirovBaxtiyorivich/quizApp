@@ -1,14 +1,12 @@
 <?php
 
 use App\Http\Controllers\API\QuizController;use App\Http\Controllers\API\UserController;use Src\Route;
-
-//Auth
+use App\Http\Controllers\WEB\MainController;
 
 Route::postMethod('/api/register', [UserController::class, 'register']);
 
 Route::postMethod('/api/login', [UserController::class, 'login']);
 
-
-//Quiz
-
 Route::postMethod('/api/quizzes', [QuizController::class, 'create']);
+
+echo "<h1 align='center'>404 NOT FOUND</h1>>";
