@@ -38,5 +38,10 @@ class UserController
                 'token' => $user->ApiToken
                 ]);
         }
+        else{
+            APIresponse([
+                'message' => 'Invalid email or password',
+            ], 401);
+        }
     }
 }

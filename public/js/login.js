@@ -17,7 +17,6 @@ async function login(){
         })
         .then(function (data){
             localStorage.setItem('token', data.token);
-            console.log(localStorage.getItem('token'));
         })
         .catch(function (error){
             console.log(error);
