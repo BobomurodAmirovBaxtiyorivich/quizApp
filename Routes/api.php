@@ -9,4 +9,4 @@ Route::postMethod('/api/login', [UserController::class, 'login']);
 
 Route::postMethod('/api/quizzes', [QuizController::class, 'create']);
 
-echo "<h1 align='center'>404 NOT FOUND</h1>>";
+Route::NotFound();

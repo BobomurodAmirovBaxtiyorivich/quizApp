@@ -20,6 +20,22 @@ async function register() {
         .catch(function (error){
             console.log(error);
         });
+
+    let errorMessage = document.getElementById("errorMessage"),
+        name = document.getElementById("name"),
+        email = document.getElementById("email"),
+        password = document.getElementById("password"),
+        confirm_password = document.getElementById("confirm-password");
+
+    if (email.value === "" || password.value === "" || name.value === "" || confirm_password.value === ""){
+        errorMessage.innerHTML = "Please fill in all fields";
+        errorMessage.style.color = "red";
+    }
+
+    if (password.value !== confirm_password.value) {
+        errorMessage.innerHTML = "Passwords don't match";
+        errorMessage.style.color = "red";
+    }
 }
 
 // let form = document.getElementById("form2"),

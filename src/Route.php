@@ -102,4 +102,12 @@ class Route
     {
         return mb_stripos(self::getRout(), '/telegram') === 0;
     }
+
+    public static function NotFound(): void
+    {
+        if (self::isAPIcall()) {
+            APIresponse(['error' => 'Not Found'], 404);
+        }
+        views('404');
+    }
 }
