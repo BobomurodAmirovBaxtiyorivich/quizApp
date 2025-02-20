@@ -40,7 +40,9 @@ class UserController
         }
         else{
             APIresponse([
-                'message' => 'Invalid email or password',
+                'errors' => [
+                    'Invalid email or password'
+                ],
             ], 401);
         }
     }

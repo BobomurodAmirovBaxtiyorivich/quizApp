@@ -11,6 +11,9 @@ function apiFetch(uri, options = {}) {
     })
         .then(async response => {
             if (!response.ok) {
+                if (window.location.href !== 'http://localhost:8080/login'){
+                    window.location.href = '/login';
+                }
                 const error = new Error("HTTP error");
                 error.data = await response.json();
                 throw error;

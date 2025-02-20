@@ -9,7 +9,7 @@ async function login(){
             window.location.href = '/dashboard';
         })
         .catch((errorMessage) => {
-            console.error(errorMessage.data.errors);
+            document.getElementById('errorMessage').innerHTML = '';
             Object.keys(errorMessage.data.errors).forEach((err) => {
                 document.getElementById('errorMessage').innerHTML += `<p class="text-red-500 mt-1">${errorMessage.data.errors[err]}</p>`;
             })

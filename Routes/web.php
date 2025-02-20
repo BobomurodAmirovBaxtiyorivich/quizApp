@@ -14,9 +14,7 @@ Route::getMethod('/login', [MainController::class, 'login']);
 
 Route::getMethod('/register', [MainController::class, 'register']);
 
-
 Route::getMethod('/dashboard', [UserController::class, 'home']);
-
 
 
 Route::NotFound();
