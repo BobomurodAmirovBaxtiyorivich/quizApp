@@ -44,4 +44,11 @@ class UserController
             ], 401);
         }
     }
+
+    public function show()
+    {
+        APIresponse([
+            'message' => 'User logged in successfully',
+        ]);
+    }
 }

@@ -8,7 +8,7 @@ class Auth {
     public static function check():true {
         $headers = getallheaders();
         if (!isset($headers['Authorization'])) {
-            APIresponse(['error' => 'Unauthorized'], 403);
+            APIresponse(['error' => 'Unauthorized'], 401);
         }
 
         if (!str_starts_with($headers['Authorization'], 'Bearer ')) {
@@ -29,7 +29,7 @@ class Auth {
         if (!$APItoken) {
             APIresponse([
                 'error' => 'Unauthorized'
-                ], 403);
+                ], 401);
         }
         return true;
     }

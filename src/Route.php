@@ -31,19 +31,21 @@ class Route
         return $resourseValue ?: false;
     }
 
-    public static function runCallback(string $route, callable|array $callback): void
+    public static function runCallback(string $route, callable|array $callback, ?string $middleware = null): void
     {
         if (gettype($callback) == 'array') {
             $resourseID = self::getResourse($route);
             if ($resourseID) {
                 $route = str_replace('{id}', $resourseID, $route);
                 if ($route == self::getRout()) {
+                    self::middleware($middleware);
                     (new $callback[0])->{$callback[1]}($resourseID);
                     exit();
                 }
             }
 
             if ($route == self::getRout()) {
+                self::middleware($middleware);
                 (new $callback[0])->{$callback[1]}();
                 exit();
             }
@@ -52,25 +54,40 @@ class Route
         if ($resourseID) {
             $route = str_replace('{id}', $resourseID, $route);
             if ($route == self::getRout()) {
+                self::middleware($middleware);
                 $callback($resourseID);
                 exit();
             }
         }
 
         if ($route == self::getRout()) {
+            self::middleware($middleware);
             $callback();
             exit();
         }
     }
 
-    public static function getMethod(string $route, callable|array $callback): void
+    public static function middleware(?string $middleware = null): void
     {
-        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            self::runCallback($route, $callback);
+        if($middleware){
+            $middlewareConfig = require '../config/middleware.php';
+            if(is_array($middlewareConfig)){
+                if (array_key_exists($middleware, $middlewareConfig)) {
+                    $middlewareClass = $middlewareConfig[$middleware];
+                    (new $middlewareClass)->handle();
+                }
+            }
         }
     }
 
-    public static function postMethod(string $route, callable|array $callback): void
+    public static function getMethod(string $route, callable|array $callback, ?string $middleware = null): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            self::runCallback($route, $callback, $middleware);
+        }
+    }
+
+    public static function postMethod(string $route, callable|array $callback, ?string $middleware = null): void
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             self::runCallback($route, $callback);
